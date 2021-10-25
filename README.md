@@ -12,7 +12,7 @@ https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-
 
 ## Project Overview
 
-pl.tomaszbuga.FirstTest Automation Framework - Reusable template for Java/Selenium frameworks. Learn more about the project here: https://sdet-tomaszbuga.medium.com/
+Test Automation Framework - Reusable template for Java/Selenium frameworks. Learn more about the project here: https://sdet-tomaszbuga.medium.com/
 
 ## Tech Stack
 
