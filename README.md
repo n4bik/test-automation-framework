@@ -6,6 +6,10 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
+## S01E03 Awakening Branch
+Related article available at:
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-awakening-or-the-first-selenium-test-case-23aff5f4e075
+
 ## Project Overview
 
 pl.tomaszbuga.FirstTest Automation Framework - Reusable template for Java/Selenium frameworks. Learn more about the project here: https://sdet-tomaszbuga.medium.com/
