@@ -8,7 +8,7 @@ LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
 ## Project Overview
 
-Test Automation Framework - Reusable template for Java/Selenium frameworks. Learn more about the project here: https://sdet-tomaszbuga.medium.com/
+pl.tomaszbuga.FirstTest Automation Framework - Reusable template for Java/Selenium frameworks. Learn more about the project here: https://sdet-tomaszbuga.medium.com/
 
 ## Tech Stack
 
@@ -28,6 +28,7 @@ Apache Maven (https://maven.apache.org/download.cgi)
 Launch `Terminal.app` and navigate (using `cd` command) to directory, where you'd like to store your copy of the source code
 
 Use the command below to clone the repository to your local directory
+
 ```
 git clone https://github.com/n4bik/test-automation-framework.git
 ``` 
