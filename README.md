@@ -6,9 +6,9 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E03 Awakening Branch
+## S01E04 SteppingStones Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-awakening-or-the-first-selenium-test-case-23aff5f4e075
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-stepping-stones-or-selenium-foundations-revisited-447b82a9da0d
 
 ## Project Overview
 

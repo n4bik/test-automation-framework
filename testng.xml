@@ -3,7 +3,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Regression1">
         <classes>
-            <class name="pl.tomaszbuga.FirstTest"/>
+            <class name="pl.tomaszbuga.tests.FirstTest"/>
         </classes>
     </test>
 </suite>
