@@ -16,7 +16,7 @@ Test Automation Framework - Reusable template for Java/Selenium frameworks. Lear
 
 ## Tech Stack
 
-`Java 11` `Maven` `TestNG` `Selenium`
+`Java 11` `Maven` `TestNG` `Selenium` `WebDriverManager` `Apache Commons Lang3`
 
 ## Key Files Description
 
