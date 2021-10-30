@@ -6,9 +6,9 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E04 SteppingStones Branch
+## S01E05 DaddyIssues Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-stepping-stones-or-selenium-foundations-revisited-447b82a9da0d
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-daddy-issues-or-page-factory-and-elements-3bd53561a990
 
 ## Project Overview
 
