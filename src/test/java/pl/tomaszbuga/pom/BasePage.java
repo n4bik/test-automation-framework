@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-    protected static final Logger LOGGER = LogManager.getLogger(BasePage.class);
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
+    protected static final Logger LOGGER = LogManager.getLogger(BasePage.class);
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -19,5 +19,9 @@ public class BasePage {
         this.driver = driver;
         wait = new WebDriverWait(driver, TIMEOUT);
         PageFactory.initElements(driver, this);
+    }
+
+    public WebDriverWait getWebDriverWait() {
+        return wait;
     }
 }
