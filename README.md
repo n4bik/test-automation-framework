@@ -6,9 +6,9 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E05 DaddyIssues Branch
+## S01E06 Zeitgeist - PageLoadStrategy Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-daddy-issues-or-page-factory-and-elements-3bd53561a990
+https://sdet-tomaszbuga.medium.com/
 
 ## Project Overview
 
