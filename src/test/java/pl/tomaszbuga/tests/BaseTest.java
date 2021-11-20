@@ -16,7 +16,6 @@ import java.util.Optional;
 
 public abstract class BaseTest {
     private ChromeDriver driver;
-    private final Duration TIMEOUT = Duration.ofSeconds(10);
     protected static final Logger LOGGER = LogManager.getLogger(BaseTest.class);
 
     @BeforeMethod(alwaysRun = true)
@@ -36,7 +35,7 @@ public abstract class BaseTest {
 
     private void setupChromeDriver() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NONE);
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(chromeOptions);
     }
@@ -52,7 +51,6 @@ public abstract class BaseTest {
                 2000,
                 Optional.of(ConnectionType.CELLULAR3G)
         ));
-        getDriver().manage().timeouts().implicitlyWait(TIMEOUT);
         getDriver().manage().window().maximize();
     }
 }
