@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CategoriesPageTests {
     @Test
-    public void verifyThatYellowButtonRedirectsToCategories() {
+    public void verifyCategoriesListWithDataBase() {
         List<String> categoryTitles = DbDataProvider.getCategoryTitles();
 
         open("http://localhost:4200");

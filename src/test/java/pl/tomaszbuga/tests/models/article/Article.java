@@ -1,95 +1,65 @@
 package pl.tomaszbuga.tests.models.article;
 
+import java.util.Objects;
+
 public class Article {
-    private String id;
     private String title;
-    private String authorFirstName;
-    private String authorLastName;
+    private String authorFullName;
     private String summary;
     private String content;
     private String createDate;
     private String publishDate;
+    private String categoryTagList;
+    private String categoryTitleList;
 
-    public Article(String id,
-                   String title,
-                   String authorFirstName,
-                   String authorLastName,
+    public Article(String title,
+                   String authorFullName,
                    String summary,
                    String content,
                    String createDate,
-                   String publishDate) {
-        this.id = id;
+                   String publishDate,
+                   String categoryTagList,
+                   String categoryTitleList) {
         this.title = title;
-        this.authorFirstName = authorFirstName;
-        this.authorLastName = authorLastName;
+        this.authorFullName = authorFullName;
         this.summary = summary;
         this.content = content;
         this.createDate = createDate;
         this.publishDate = publishDate;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
+        this.categoryTagList = categoryTagList;
+        this.categoryTitleList = categoryTitleList;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getAuthorFirstName() {
-        return authorFirstName;
-    }
-
-    public void setAuthorFirstName(String authorFirstName) {
-        this.authorFirstName = authorFirstName;
-    }
-
-    public String getAuthorLastName() {
-        return authorLastName;
-    }
-
-    public void setAuthorLastName(String authorLastName) {
-        this.authorLastName = authorLastName;
-    }
-
-    public String getSummary() {
-        return summary;
+    public void setAuthorFullName(String authorFullName) {
+        this.authorFullName = authorFullName;
     }
 
     public void setSummary(String summary) {
         this.summary = summary;
     }
 
-    public String getContent() {
-        return content;
-    }
-
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getCreateDate() {
-        return createDate;
     }
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    public String getPublishDate() {
-        return publishDate;
-    }
-
     public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
+    }
+
+    public void setCategoryTagList(String categoryTagList) {
+        this.categoryTagList = categoryTagList;
+    }
+
+    public void setCategoryTitleList(String categoryTitleList) {
+        this.categoryTitleList = categoryTitleList;
     }
 
     @Override
@@ -99,18 +69,26 @@ public class Article {
 
         Article article = (Article) o;
 
-        if (!authorFirstName.equals(article.authorFirstName)) return false;
-        if (!authorLastName.equals(article.authorLastName)) return false;
-        if (!publishDate.equals(article.publishDate)) return false;
+        if (!Objects.equals(authorFullName, article.authorFullName)) return false;
+        if (!Objects.equals(summary, article.summary)) return false;
+        if (!Objects.equals(content, article.content)) return false;
+        if (!Objects.equals(createDate, article.createDate)) return false;
+        if (!Objects.equals(publishDate, article.publishDate)) return false;
+        if (!Objects.equals(categoryTagList, article.categoryTagList)) return false;
+        if (!Objects.equals(categoryTitleList, article.categoryTitleList)) return false;
         return title.equals(article.title);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + title.hashCode();
-        result = 31 * result + authorFirstName.hashCode();
-        result = 31 * result + authorLastName.hashCode();
+        int result = title.hashCode();
+        result = 31 * result + authorFullName.hashCode();
+        result = 31 * result + (summary != null ? summary.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
+        result = 31 * result + publishDate.hashCode();
+        result = 31 * result + categoryTagList.hashCode();
+        result = 31 * result + categoryTitleList.hashCode();
         return result;
     }
 }

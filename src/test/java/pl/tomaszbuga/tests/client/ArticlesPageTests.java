@@ -2,6 +2,7 @@ package pl.tomaszbuga.tests.client;
 
 import com.codeborne.selenide.WebDriverRunner;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.tests.models.article.Article;
@@ -12,12 +13,13 @@ import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static pl.tomaszbuga.utils.DbDataProvider.getArticlesListByCategoryId;
 
 public class ArticlesPageTests {
     @Test
-    public void verifyArticleListWithDataBase() {
+    public void verifyArticlesListWithDataBase() {
         open("http://localhost:4200");
         $(".yellow-button").click();
         $(".subtitle-content").shouldHave(exactText("Please select category"));
@@ -30,14 +32,27 @@ public class ArticlesPageTests {
         $$(".article-row")
                 .shouldBe(sizeGreaterThan(0))
                 .forEach(row -> {
-                    String authorFullName = row.find(".article-author-content").getText();
+                    List<String> categoryTitlesList = new ArrayList<>();
+                    List<String> categoryTagsList = new ArrayList<>();
+
+                    row.$$(".badge-tag").forEach(badge -> {
+                        categoryTagsList.add(badge.getText());
+                        categoryTitlesList.add(badge.hover().$(".badge-title").shouldBe(visible).getText());
+                    });
 
                     Article article = new ArticleBuilder()
                             .setTitle(row.find(".article-title-content").getText())
-                            .setAuthorFirstName(authorFullName.split(" ")[0].trim())
-                            .setAuthorLastName(authorFullName.split(" ")[1].trim())
+                            .setAuthorFullName(row.find(".article-author-content").getText())
                             // PublishDate is incorrectly named on the webpage as create-date
                             .setPublishDate(row.find(".article-create-date-content").getText())
+                            .setCategoryTagList(categoryTagsList
+                                    .toString()
+                                    .replace("[", "")
+                                    .replace("]", ""))
+                            .setCategoryTitleList(categoryTitlesList
+                                    .toString()
+                                    .replace("[", "")
+                                    .replace("]", ""))
                             .build();
 
                     articlesListFromPage.add(article);

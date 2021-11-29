@@ -1,22 +1,22 @@
 package pl.tomaszbuga.tests.models.article;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class ArticleBuilder {
-    private String id;
     private String title;
-    private String authorFirstName;
-    private String authorLastName;
+    private String authorFullName;
     private String summary;
     private String content;
     private String createDate;
     private String publishDate;
+    private String categoryTagList;
+    private String categoryTitleList;
 
     public ArticleBuilder() {
 
-    }
-
-    public ArticleBuilder setId(String id) {
-        this.id = id;
-        return this;
     }
 
     public ArticleBuilder setTitle(String title) {
@@ -24,13 +24,8 @@ public class ArticleBuilder {
         return this;
     }
 
-    public ArticleBuilder setAuthorFirstName(String authorFirstName) {
-        this.authorFirstName = authorFirstName;
-        return this;
-    }
-
-    public ArticleBuilder setAuthorLastName(String authorLastName) {
-        this.authorLastName = authorLastName;
+    public ArticleBuilder setAuthorFullName(String authorFullName) {
+        this.authorFullName = authorFullName;
         return this;
     }
 
@@ -60,15 +55,39 @@ public class ArticleBuilder {
         return this;
     }
 
+    public ArticleBuilder setCategoryTagList(String categoryTagList) {
+        this.categoryTagList = Arrays
+                .stream(categoryTagList.split(", "))
+                .sorted()
+                .collect(Collectors.toList())
+                .toString()
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
+        return this;
+    }
+
+    public ArticleBuilder setCategoryTitleList(String categoryTitleList) {
+        this.categoryTitleList = Arrays
+                .stream(categoryTitleList.split(", "))
+                .sorted()
+                .collect(Collectors.toList())
+                .toString()
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
+        return this;
+    }
+
     public Article build() {
         return new Article(
-                id,
                 title,
-                authorFirstName,
-                authorLastName,
+                authorFullName,
                 summary,
                 content,
                 createDate,
-                publishDate);
+                publishDate,
+                categoryTagList,
+                categoryTitleList);
     }
 }
