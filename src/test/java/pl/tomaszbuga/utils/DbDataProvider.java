@@ -1,8 +1,5 @@
 package pl.tomaszbuga.utils;
 
-import pl.tomaszbuga.tests.models.article.Article;
-import pl.tomaszbuga.tests.models.article.ArticleBuilder;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,17 +14,14 @@ public class DbDataProvider {
     public static List<String> getCategoryTitles() {
         List<String> titleList = new ArrayList<>();
 
-        try {
-            Connection connection = getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT title FROM category");
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT title FROM category")) {
 
             while (resultSet.next()) {
                 String categoryTitle = resultSet.getString(1);
                 titleList.add(categoryTitle);
             }
-
-            teardown(connection, statement, resultSet);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,89 +30,83 @@ public class DbDataProvider {
         return titleList;
     }
 
-    public static List<Article> getArticlesListByCategoryId(String categoryId) {
-        List<Article> articleList = new ArrayList<>();
-
-        try {
-            Connection connection = getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(
-                    "SELECT article.title,\n" +
-                            "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
-                            "       article.publish_date,\n" +
-                            "       string_agg(category.tag, ', ')                   as category_tag_list,\n" +
-                            "       string_agg(category.title, ', ')                 as category_title_list\n" +
-                            "FROM category,\n" +
-                            "     article_category,\n" +
-                            "     (\n" +
-                            "         SELECT article_id as aid\n" +
-                            "         FROM article_category\n" +
-                            "         WHERE category_id = " + categoryId + "\n" +
-                            "     ) as ac\n" +
-                            "         JOIN article\n" +
-                            "              ON article.id = ac.aid\n" +
-                            "WHERE article.id = article_category.article_id\n" +
-                            "  AND category.id = article_category.category_id\n" +
-                            "GROUP BY 1, 2, 3;");
-
-            while (resultSet.next()) {
-                Article article = new ArticleBuilder()
-                        .setTitle(resultSet.getString(1))
-                        .setAuthorFullName(resultSet.getString(2))
-                        .setPublishDate(resultSet.getString(3))
-                        .setCategoryTagList(resultSet.getString(4))
-                        .setCategoryTitleList(resultSet.getString(5))
-                        .build();
-
-                articleList.add(article);
-            }
-
-            teardown(connection, statement, resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return articleList;
-    }
-
-    public static Article getArticleDetails(String articleId) {
-        Article article = null;
-
-        try {
-            Connection connection = getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(
-                    "SELECT title,\n" +
-                            "       article.publish_date,\n" +
-                            "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
-                            "       article.summary,\n" +
-                            "       article.content\n" +
-                            "FROM article\n" +
-                            "WHERE article.id = " + articleId + ";");
-
-            while (resultSet.next()) {
-                article = new ArticleBuilder()
-                        .setTitle(resultSet.getString(1))
-                        .setPublishDate(resultSet.getString(2))
-                        .setAuthorFullName(resultSet.getString(3))
-                        .setSummary(resultSet.getString(4))
-                        .setContent(resultSet.getString(5))
-                        .build();
-            }
-
-            teardown(connection, statement, resultSet);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return article;
-    }
-
-    private static void teardown(Connection connection, Statement statement, ResultSet resultSet)
-            throws SQLException {
-        resultSet.close();
-        statement.close();
-        connection.close();
-    }
+//    public static List<Article> getArticlesListByCategoryId(String categoryId) {
+//        List<Article> articleList = new ArrayList<>();
+//
+//        try {
+//            Connection connection = getConnection();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(
+//                    "SELECT article.title,\n" +
+//                            "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
+//                            "       article.publish_date,\n" +
+//                            "       string_agg(category.tag, ', ')                   as category_tag_list,\n" +
+//                            "       string_agg(category.title, ', ')                 as category_title_list\n" +
+//                            "FROM category,\n" +
+//                            "     article_category,\n" +
+//                            "     (\n" +
+//                            "         SELECT article_id as aid\n" +
+//                            "         FROM article_category\n" +
+//                            "         WHERE category_id = " + categoryId + "\n" +
+//                            "     ) as ac\n" +
+//                            "         JOIN article\n" +
+//                            "              ON article.id = ac.aid\n" +
+//                            "WHERE article.id = article_category.article_id\n" +
+//                            "  AND category.id = article_category.category_id\n" +
+//                            "GROUP BY 1, 2, 3;");
+//
+//            while (resultSet.next()) {
+//                Article article = new ArticleBuilder()
+//                        .setTitle(resultSet.getString(1))
+//                        .setAuthorFullName(resultSet.getString(2))
+//                        .setPublishDate(resultSet.getString(3))
+//                        .setCategoryTagList(resultSet.getString(4))
+//                        .setCategoryTitleList(resultSet.getString(5))
+//                        .build();
+//
+//                articleList.add(article);
+//            }
+//
+//            teardown(connection, statement, resultSet);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return articleList;
+//    }
+//
+//    public static Article getArticleDetails(String articleId) {
+//        Article article = null;
+//
+//        try {
+//            Connection connection = getConnection();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(
+//                    "SELECT title,\n" +
+//                            "       article.publish_date,\n" +
+//                            "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
+//                            "       article.summary,\n" +
+//                            "       article.content\n" +
+//                            "FROM article\n" +
+//                            "WHERE article.id = " + articleId + ";");
+//
+//            while (resultSet.next()) {
+//                article = new ArticleBuilder()
+//                        .setTitle(resultSet.getString(1))
+//                        .setPublishDate(resultSet.getString(2))
+//                        .setAuthorFullName(resultSet.getString(3))
+//                        .setSummary(resultSet.getString(4))
+//                        .setContent(resultSet.getString(5))
+//                        .build();
+//            }
+//
+//            teardown(connection, statement, resultSet);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return article;
+//    }
+//
 
 }
