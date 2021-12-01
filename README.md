@@ -6,9 +6,9 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E06 Zeitgeist - PageLoadStrategy Branch
+## S01E07 Alchemy - ClientTests Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-zeitgeist-or-page-loading-strategies-and-waits-e951f49a5180
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-alchemy-or-translating-jira-with-selenide-with-e8831ebfe337
 
 ## Project Overview
 
