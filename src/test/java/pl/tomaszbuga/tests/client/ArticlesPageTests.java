@@ -51,4 +51,38 @@ public class ArticlesPageTests {
         Assert.assertTrue(CollectionUtils.isEqualCollection(articlesList, articlesListFromPage));
     }
 
+    @Test
+    public void verifyTooltipDisplayOnBadgeHover() {
+        open("http://localhost:4200");
+        $(".yellow-button").click();
+        $(".subtitle-content").shouldHave(exactText("Please select category"));
+        $("app-button").click();
+        $(".subtitle-content").shouldHave(exactText("Please select article"));
+        $(".yellow-badge").hover();
+        Assert.assertTrue($(".badge-title").isDisplayed());
+    }
+
+    @Test
+    public void verifyOpenArticleSidebarExpandOnHover() {
+        open("http://localhost:4200");
+        $(".yellow-button").click();
+        $(".subtitle-content").shouldHave(exactText("Please select category"));
+        $("app-button").click();
+        $(".subtitle-content").shouldHave(exactText("Please select article"));
+        $(".go-to-article-button").hover();
+        Assert.assertTrue($(".go-to-article-text").isDisplayed());
+    }
+
+    @Test
+    public void verifyThatGoToArticleButtonRedirectsToArticleDetails() {
+        open("http://localhost:4200");
+        $(".yellow-button").click();
+        $(".subtitle-content").shouldHave(exactText("Please select category"));
+        $("app-button").click();
+        $(".subtitle-content").shouldHave(exactText("Please select article"));
+        $(".go-to-article-button").hover();
+        $(".go-to-article-text").click();
+        Assert.assertTrue(WebDriverRunner.url().contains("articleId"));
+    }
+
 }
