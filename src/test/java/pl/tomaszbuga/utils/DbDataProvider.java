@@ -53,7 +53,7 @@ public class DbDataProvider {
                      "              ON article.id = ac.aid\n" +
                      "WHERE article.id = article_category.article_id\n" +
                      "  AND category.id = article_category.category_id\n" +
-                     "GROUP BY 1, 2, 3;")){
+                     "GROUP BY 1, 2, 3;")) {
 
             while (resultSet.next()) {
                 Article article = new Article();
@@ -71,5 +71,34 @@ public class DbDataProvider {
         }
 
         return articleList;
+    }
+
+    public static Article getArticleDetails(String articleId) {
+        Article article = new Article();
+
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT article.title,\n" +
+                             "       article.publish_date,\n" +
+                             "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
+                             "       article.summary,\n" +
+                             "       article.content\n" +
+                             "FROM article\n" +
+                             "WHERE article.id = " + articleId + ";")) {
+
+            while (resultSet.next()) {
+                article.setTitle(resultSet.getString(1));
+                article.setPublishDate(resultSet.getString(2));
+                article.setAuthorFullName(resultSet.getString(3));
+                article.setSummary(resultSet.getString(4));
+                article.setContent(resultSet.getString(5));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return article;
     }
 }

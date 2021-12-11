@@ -9,6 +9,8 @@ public class Article {
     private String title;
     private String authorFullName;
     private String publishDate;
+    private String summary;
+    private String content;
     private String categoryTagList;
     private String categoryTitleList;
 
@@ -25,6 +27,14 @@ public class Article {
 
     public void setPublishDate(String publishDate) {
         this.publishDate = Objects.requireNonNullElse(publishDate, "");
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public void setCategoryTagList(String categoryTagList) {
@@ -53,8 +63,10 @@ public class Article {
         if (!title.equals(article.title)) return false;
         if (!authorFullName.equals(article.authorFullName)) return false;
         if (!publishDate.equals(article.publishDate)) return false;
-        if (!categoryTagList.equals(article.categoryTagList)) return false;
-        return categoryTitleList.equals(article.categoryTitleList);
+        if (!Objects.equals(summary, article.summary)) return false;
+        if (!Objects.equals(content, article.content)) return false;
+        if (!Objects.equals(categoryTagList, article.categoryTagList)) return false;
+        return Objects.equals(categoryTitleList, article.categoryTitleList);
     }
 
     @Override
@@ -62,39 +74,11 @@ public class Article {
         int result = title.hashCode();
         result = 31 * result + authorFullName.hashCode();
         result = 31 * result + publishDate.hashCode();
-        result = 31 * result + categoryTagList.hashCode();
-        result = 31 * result + categoryTitleList.hashCode();
+        result = 31 * result + (summary != null ? summary.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (categoryTagList != null ? categoryTagList.hashCode() : 0);
+        result = 31 * result + (categoryTitleList != null ? categoryTitleList.hashCode() : 0);
         return result;
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-//    public void setPublishDate(String publishDate) {
-//        this.publishDate = Objects.requireNonNullElse(publishDate, "");
-//    }
-//
-//    public void setCategoryTagList(String categoryTagList) {
-//        List<String> sortedTagList =
-//                Arrays.stream(categoryTagList.split(", "))
-//                        .sorted()
-//                        .collect(Collectors.toList());
-//        this.categoryTagList = String.join(", ", sortedTagList);
-//    }
-//
-//    public void setCategoryTitleList(String categoryTitleList) {
-//        List<String> sortedTitleList =
-//                Arrays.stream(categoryTitleList.split(", "))
-//                        .sorted()
-//                        .collect(Collectors.toList());
-//        this.categoryTitleList = String.join(", ", sortedTitleList);
-//    }
-//
-//}

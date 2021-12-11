@@ -1,24 +1,17 @@
 package pl.tomaszbuga.tests.client;
 
 import com.codeborne.selenide.WebDriverRunner;
-import org.apache.commons.collections4.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.tests.models.article.Article;
-import pl.tomaszbuga.tests.models.article.ArticleBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.*;
 import static pl.tomaszbuga.utils.DbDataProvider.getArticleDetails;
-import static pl.tomaszbuga.utils.DbDataProvider.getArticlesListByCategoryId;
 
 public class ArticleDetailsPageTests {
     @Test
-    public void verifyThatGoToArticleButtonRedirectsToArticleDetails() {
+    public void verifyThatArticleDetailsAreDisplayedCorrectly() {
         open("http://localhost:4200");
         $(".yellow-button").click();
         $(".subtitle-content").shouldHave(exactText("Please select category"));
