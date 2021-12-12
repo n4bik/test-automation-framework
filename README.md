@@ -6,9 +6,9 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E07 Alchemy - ClientTests Branch
+## S01E08 Magic - ClientTest Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-alchemy-or-translating-jira-with-selenide-with-e8831ebfe337
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-magic-or-jira-selenide-complex-sql-java-225e1ba3d93e
 
 ## Project Overview
 
