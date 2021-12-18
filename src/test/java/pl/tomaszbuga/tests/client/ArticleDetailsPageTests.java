@@ -1,35 +1,36 @@
 package pl.tomaszbuga.tests.client;
 
-import com.codeborne.selenide.WebDriverRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pl.tomaszbuga.pom.ArticleDetailsPage;
+import pl.tomaszbuga.pom.HomePage;
 import pl.tomaszbuga.tests.models.article.Article;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.*;
 import static pl.tomaszbuga.utils.DbDataProvider.getArticleDetails;
 
 public class ArticleDetailsPageTests {
     @Test
     public void verifyThatArticleDetailsAreDisplayedCorrectly() {
-        open("http://localhost:4200");
-        $(".yellow-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select category"));
-        $("app-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select article"));
-        $(".go-to-article-button").hover();
-        $(".go-to-article-text").click();
+        HomePage homePage = new HomePage();
+        ArticleDetailsPage articleDetailsPage = homePage
+                .openHomePage()
+                .clickYellowButton()
+                .checkIfCategoriesPageLoaded()
+                .clickFirstAvailableCategory()
+                .checkIfArticlesPageLoaded()
+                .hoverOverGoToArticleButton()
+                .clickGoToArticleButton()
+                .checkIfArticleDetailsPageLoaded();
 
-        String articleIdFromUrl = WebDriverRunner.url().split("=")[1];
-        Article articleDetails = getArticleDetails(articleIdFromUrl);
+        Article articleDetailsFromDb = getArticleDetails(articleDetailsPage.getArticleIdFromUrl());
 
         Article articleDetailsFromPage = new Article();
-        articleDetailsFromPage.setTitle($("h1").getText());
-        articleDetailsFromPage.setPublishDate($(".article-display-date").getText());
-        articleDetailsFromPage.setAuthorFullName($(".article-display-author-name").getText());
-        articleDetailsFromPage.setSummary($(".article-display-summary").getText());
-        articleDetailsFromPage.setContent($(".article-display-content").innerHtml());
+        articleDetailsFromPage.setTitle(articleDetailsPage.getArticleTitle());
+        articleDetailsFromPage.setPublishDate(articleDetailsPage.getArticlePublishDate());
+        articleDetailsFromPage.setAuthorFullName(articleDetailsPage.getArticleAuthorFullName());
+        articleDetailsFromPage.setSummary(articleDetailsPage.getArticleSummary());
+        articleDetailsFromPage.setContent(articleDetailsPage.getArticleContent());
 
-        Assert.assertEquals(articleDetails, articleDetailsFromPage);
+        Assert.assertEquals(articleDetailsFromPage, articleDetailsFromDb);
     }
 }

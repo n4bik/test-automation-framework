@@ -1,88 +1,70 @@
 package pl.tomaszbuga.tests.client;
 
-import com.codeborne.selenide.WebDriverRunner;
 import org.apache.commons.collections4.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pl.tomaszbuga.pom.ArticlesPage;
+import pl.tomaszbuga.pom.HomePage;
 import pl.tomaszbuga.tests.models.article.Article;
+import pl.tomaszbuga.utils.DbDataProvider;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
-import static pl.tomaszbuga.utils.DbDataProvider.getArticlesListByCategoryId;
 
 public class ArticlesPageTests {
     @Test
     public void verifyArticlesListWithDataBase() {
-        open("http://localhost:4200");
-        $(".yellow-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select category"));
-        $("app-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select article"));
-        String categoryIdFromUrl = WebDriverRunner.url().split("=")[1];
-        List<Article> articlesList = getArticlesListByCategoryId(categoryIdFromUrl);
-        List<Article> articlesListFromPage = new ArrayList<>();
+        HomePage homePage = new HomePage();
+        ArticlesPage articlesPage = homePage
+                .openHomePage()
+                .clickYellowButton()
+                .checkIfCategoriesPageLoaded()
+                .clickFirstAvailableCategory()
+                .checkIfArticlesPageLoaded();
 
-        $$(".article-row")
-                .shouldBe(sizeGreaterThan(0))
-                .forEach(row -> {
-                    List<String> categoryTitlesList = new ArrayList<>();
-                    List<String> categoryTagsList = new ArrayList<>();
+        List<Article> articlesListFromDb =
+                DbDataProvider.getArticlesListByCategoryId(articlesPage.getCategoryIdFromUrl());
 
-                    row.$$(".badge-tag").forEach(badge -> {
-                        categoryTagsList.add(badge.getText());
-                        categoryTitlesList.add(badge.hover().$(".badge-title").shouldBe(visible).getText());
-                    });
-
-                    Article article = new Article();
-                    article.setTitle(row.$(".article-title-content").getText());
-                    article.setAuthorFullName(row.$(".article-author-content").getText());
-                    article.setPublishDate(row.$(".article-create-date-content").getText());
-                    article.setCategoryTagList(String.join(", ", categoryTagsList));
-                    article.setCategoryTitleList(String.join(", ", categoryTitlesList));
-
-                    articlesListFromPage.add(article);
-                });
-
-        Assert.assertTrue(CollectionUtils.isEqualCollection(articlesList, articlesListFromPage));
+        Assert.assertTrue(CollectionUtils
+                .isEqualCollection(articlesListFromDb, articlesPage.getArticleListFromPage()));
     }
 
     @Test
     public void verifyTooltipDisplayOnBadgeHover() {
-        open("http://localhost:4200");
-        $(".yellow-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select category"));
-        $("app-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select article"));
-        $(".yellow-badge").hover();
-        Assert.assertTrue($(".badge-title").isDisplayed());
+        HomePage homePage = new HomePage();
+        homePage
+                .openHomePage()
+                .clickYellowButton()
+                .checkIfCategoriesPageLoaded()
+                .clickFirstAvailableCategory()
+                .checkIfArticlesPageLoaded()
+                .hoverOverCategoryBadge()
+                .checkIfCategoryBadgeTitleDisplayed();
     }
 
     @Test
     public void verifyOpenArticleSidebarExpandOnHover() {
-        open("http://localhost:4200");
-        $(".yellow-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select category"));
-        $("app-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select article"));
-        $(".go-to-article-button").hover();
-        Assert.assertTrue($(".go-to-article-text").isDisplayed());
+        HomePage homePage = new HomePage();
+        homePage
+                .openHomePage()
+                .clickYellowButton()
+                .checkIfCategoriesPageLoaded()
+                .clickFirstAvailableCategory()
+                .checkIfArticlesPageLoaded()
+                .hoverOverGoToArticleButton()
+                .checkIfGoToArticleSidebarDisplayed();
     }
 
     @Test
     public void verifyThatGoToArticleButtonRedirectsToArticleDetails() {
-        open("http://localhost:4200");
-        $(".yellow-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select category"));
-        $("app-button").click();
-        $(".subtitle-content").shouldHave(exactText("Please select article"));
-        $(".go-to-article-button").hover();
-        $(".go-to-article-text").click();
-        Assert.assertTrue(WebDriverRunner.url().contains("articleId"));
+        HomePage homePage = new HomePage();
+        homePage
+                .openHomePage()
+                .clickYellowButton()
+                .checkIfCategoriesPageLoaded()
+                .clickFirstAvailableCategory()
+                .checkIfArticlesPageLoaded()
+                .clickGoToArticleButton()
+                .checkIfArticleDetailsPageLoaded();
     }
 
 }
