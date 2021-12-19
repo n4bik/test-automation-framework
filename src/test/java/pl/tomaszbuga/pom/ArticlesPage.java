@@ -76,11 +76,12 @@ public class ArticlesPage extends PageWithSubtitle {
                     });
 
                     Article article = new Article();
-                    article.setTitle(row.find(articleTitleLocator).getText());
-                    article.setAuthorFullName(row.find(articleAuthorFullNameLocator).getText());
-                    article.setPublishDate(row.find(articlePublishDateLocator).getText());
-                    article.setCategoryTagList(parseListIntoString(categoryTagsList));
-                    article.setCategoryTitleList(parseListIntoString(categoryTitlesList));
+                    article
+                            .setTitle(row.find(articleTitleLocator).getText())
+                            .setAuthorFullName(row.find(articleAuthorFullNameLocator).getText())
+                            .setPublishDate(row.find(articlePublishDateLocator).getText())
+                            .setCategoryTagList(parseListIntoString(categoryTagsList))
+                            .setCategoryTitleList(parseListIntoString(categoryTitlesList));
 
                     articlesListFromPage.add(article);
                 });

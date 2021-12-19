@@ -17,40 +17,47 @@ public class Article {
     public Article() {
     }
 
-    public void setTitle(String title) {
+    public Article setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    public void setAuthorFullName(String authorFullName) {
+    public Article setAuthorFullName(String authorFullName) {
         this.authorFullName = authorFullName;
+        return this;
     }
 
-    public void setPublishDate(String publishDate) {
+    public Article setPublishDate(String publishDate) {
         this.publishDate = Objects.requireNonNullElse(publishDate, "");
+        return this;
     }
 
-    public void setSummary(String summary) {
+    public Article setSummary(String summary) {
         this.summary = summary;
+        return this;
     }
 
-    public void setContent(String content) {
+    public Article setContent(String content) {
         this.content = content;
+        return this;
     }
 
-    public void setCategoryTagList(String categoryTagList) {
+    public Article setCategoryTagList(String categoryTagList) {
         List<String> sortedTagList =
                 Arrays.stream(categoryTagList.split(", "))
                         .sorted()
                         .collect(Collectors.toList());
         this.categoryTagList = String.join(", ", sortedTagList);
+        return this;
     }
 
-    public void setCategoryTitleList(String categoryTitleList) {
+    public Article setCategoryTitleList(String categoryTitleList) {
         List<String> sortedTitleList =
                 Arrays.stream(categoryTitleList.split(", "))
                         .sorted()
                         .collect(Collectors.toList());
         this.categoryTitleList = String.join(", ", sortedTitleList);
+        return this;
     }
 
     @Override

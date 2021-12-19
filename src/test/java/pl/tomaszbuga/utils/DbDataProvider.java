@@ -57,11 +57,12 @@ public class DbDataProvider {
 
             while (resultSet.next()) {
                 Article article = new Article();
-                article.setTitle(resultSet.getString(1));
-                article.setAuthorFullName(resultSet.getString(2));
-                article.setPublishDate(resultSet.getString(3));
-                article.setCategoryTagList(resultSet.getString(4));
-                article.setCategoryTitleList(resultSet.getString(5));
+                article
+                        .setTitle(resultSet.getString(1))
+                        .setAuthorFullName(resultSet.getString(2))
+                        .setPublishDate(resultSet.getString(3))
+                        .setCategoryTagList(resultSet.getString(4))
+                        .setCategoryTitleList(resultSet.getString(5));
 
                 articleList.add(article);
             }
@@ -88,11 +89,12 @@ public class DbDataProvider {
                              "WHERE article.id = " + articleId + ";")) {
 
             while (resultSet.next()) {
-                article.setTitle(resultSet.getString(1));
-                article.setPublishDate(resultSet.getString(2));
-                article.setAuthorFullName(resultSet.getString(3));
-                article.setSummary(resultSet.getString(4));
-                article.setContent(resultSet.getString(5));
+                article
+                        .setTitle(resultSet.getString(1))
+                        .setPublishDate(resultSet.getString(2))
+                        .setAuthorFullName(resultSet.getString(3))
+                        .setSummary(resultSet.getString(4))
+                        .setContent(resultSet.getString(5));
             }
 
         } catch (SQLException e) {

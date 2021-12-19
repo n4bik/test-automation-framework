@@ -25,11 +25,12 @@ public class ArticleDetailsPageTests {
         Article articleDetailsFromDb = getArticleDetails(articleDetailsPage.getArticleIdFromUrl());
 
         Article articleDetailsFromPage = new Article();
-        articleDetailsFromPage.setTitle(articleDetailsPage.getArticleTitle());
-        articleDetailsFromPage.setPublishDate(articleDetailsPage.getArticlePublishDate());
-        articleDetailsFromPage.setAuthorFullName(articleDetailsPage.getArticleAuthorFullName());
-        articleDetailsFromPage.setSummary(articleDetailsPage.getArticleSummary());
-        articleDetailsFromPage.setContent(articleDetailsPage.getArticleContent());
+        articleDetailsFromPage
+                .setTitle(articleDetailsPage.getArticleTitle())
+                .setPublishDate(articleDetailsPage.getArticlePublishDate())
+                .setAuthorFullName(articleDetailsPage.getArticleAuthorFullName())
+                .setSummary(articleDetailsPage.getArticleSummary())
+                .setContent(articleDetailsPage.getArticleContent());
 
         Assert.assertEquals(articleDetailsFromPage, articleDetailsFromDb);
     }
