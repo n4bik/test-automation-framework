@@ -39,6 +39,7 @@ public class CategoriesPage extends PageWithSubtitle {
     }
 
     public ArticlesPage clickFirstAvailableCategory() {
+        LOGGER.info("Click on the first available Category");
         titlesFromPage.get(0).click();
         return new ArticlesPage();
     }
