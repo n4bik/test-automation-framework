@@ -4,7 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import pl.tomaszbuga.pom.utils.PageWithSubtitle;
-import pl.tomaszbuga.tests.models.article.Article;
+import pl.tomaszbuga.tests.models.article.ArticleFromList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +55,9 @@ public class ArticlesPage extends PageWithSubtitle {
         return WebDriverRunner.url().split("=")[1];
     }
 
-    public List<Article> getArticleListFromPage() {
+    public List<ArticleFromList> getArticleListFromPage() {
         LOGGER.info("Getting Articles list from Articles page");
-        List<Article> articlesListFromPage = new ArrayList<>();
+        List<ArticleFromList> articlesListFromPage = new ArrayList<>();
 
         articles
                 .shouldBe(sizeGreaterThan(0))
@@ -75,15 +75,15 @@ public class ArticlesPage extends PageWithSubtitle {
                                         .getText());
                     });
 
-                    Article article = new Article();
-                    article
+                    ArticleFromList articleFromList = ArticleFromList.builder()
                             .setTitle(row.find(articleTitleLocator).getText())
                             .setAuthorFullName(row.find(articleAuthorFullNameLocator).getText())
                             .setPublishDate(row.find(articlePublishDateLocator).getText())
                             .setCategoryTagList(parseListIntoString(categoryTagsList))
-                            .setCategoryTitleList(parseListIntoString(categoryTitlesList));
+                            .setCategoryTitleList(parseListIntoString(categoryTitlesList))
+                            .build();
 
-                    articlesListFromPage.add(article);
+                    articlesListFromPage.add(articleFromList);
                 });
 
         return articlesListFromPage;

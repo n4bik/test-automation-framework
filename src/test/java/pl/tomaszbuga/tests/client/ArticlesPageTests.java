@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.ArticlesPage;
 import pl.tomaszbuga.pom.HomePage;
-import pl.tomaszbuga.tests.models.article.Article;
+import pl.tomaszbuga.tests.models.article.ArticleFromList;
 import pl.tomaszbuga.utils.DbDataProvider;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class ArticlesPageTests {
                 .clickFirstAvailableCategory()
                 .checkIfArticlesPageLoaded();
 
-        List<Article> articlesListFromDb =
+        List<ArticleFromList> articlesListFromDb =
                 DbDataProvider.getArticlesListByCategoryId(articlesPage.getCategoryIdFromUrl());
 
         Assert.assertTrue(CollectionUtils

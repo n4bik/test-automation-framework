@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.ArticleDetailsPage;
 import pl.tomaszbuga.pom.HomePage;
-import pl.tomaszbuga.tests.models.article.Article;
+import pl.tomaszbuga.tests.models.article.ArticleDetails;
 
 import static pl.tomaszbuga.utils.DbDataProvider.getArticleDetails;
 
@@ -22,15 +22,15 @@ public class ArticleDetailsPageTests {
                 .clickGoToArticleButton()
                 .checkIfArticleDetailsPageLoaded();
 
-        Article articleDetailsFromDb = getArticleDetails(articleDetailsPage.getArticleIdFromUrl());
+        ArticleDetails articleDetailsFromDb = getArticleDetails(articleDetailsPage.getArticleIdFromUrl());
 
-        Article articleDetailsFromPage = new Article();
-        articleDetailsFromPage
+        ArticleDetails articleDetailsFromPage = ArticleDetails.builder()
                 .setTitle(articleDetailsPage.getArticleTitle())
                 .setPublishDate(articleDetailsPage.getArticlePublishDate())
                 .setAuthorFullName(articleDetailsPage.getArticleAuthorFullName())
                 .setSummary(articleDetailsPage.getArticleSummary())
-                .setContent(articleDetailsPage.getArticleContent());
+                .setContent(articleDetailsPage.getArticleContent())
+                .build();
 
         Assert.assertEquals(articleDetailsFromPage, articleDetailsFromDb);
     }
