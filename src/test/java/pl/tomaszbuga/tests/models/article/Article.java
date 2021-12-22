@@ -1,9 +1,13 @@
 package pl.tomaszbuga.tests.models.article;
 
+import pl.tomaszbuga.utils.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static pl.tomaszbuga.utils.StringUtils.parseListIntoString;
 
 public class Article {
     private String title;
@@ -47,7 +51,7 @@ public class Article {
                 Arrays.stream(categoryTagList.split(", "))
                         .sorted()
                         .collect(Collectors.toList());
-        this.categoryTagList = String.join(", ", sortedTagList);
+        this.categoryTagList = parseListIntoString(sortedTagList);
         return this;
     }
 
@@ -56,7 +60,7 @@ public class Article {
                 Arrays.stream(categoryTitleList.split(", "))
                         .sorted()
                         .collect(Collectors.toList());
-        this.categoryTitleList = String.join(", ", sortedTitleList);
+        this.categoryTitleList = parseListIntoString(sortedTitleList);
         return this;
     }
 
