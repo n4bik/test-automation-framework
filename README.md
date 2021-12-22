@@ -8,7 +8,7 @@ LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
 ## S01E09 Fear Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-magic-or-jira-selenide-complex-sql-java-225e1ba3d93e
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-fear-or-code-review-and-refactoring-part-1-e4b13832ede3
 
 ## Project Overview
 
