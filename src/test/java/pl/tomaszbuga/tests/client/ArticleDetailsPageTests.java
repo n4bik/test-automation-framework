@@ -24,13 +24,7 @@ public class ArticleDetailsPageTests {
 
         ArticleDetails articleDetailsFromDb = getArticleDetails(articleDetailsPage.getArticleIdFromUrl());
 
-        ArticleDetails articleDetailsFromPage = ArticleDetails.builder()
-                .setTitle(articleDetailsPage.getArticleTitle())
-                .setPublishDate(articleDetailsPage.getArticlePublishDate())
-                .setAuthorFullName(articleDetailsPage.getArticleAuthorFullName())
-                .setSummary(articleDetailsPage.getArticleSummary())
-                .setContent(articleDetailsPage.getArticleContent())
-                .build();
+        ArticleDetails articleDetailsFromPage = articleDetailsPage.getArticleDetailsFromPage();
 
         Assert.assertEquals(articleDetailsFromPage, articleDetailsFromDb);
     }

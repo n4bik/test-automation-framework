@@ -3,6 +3,7 @@ package pl.tomaszbuga.pom;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import pl.tomaszbuga.pom.utils.BasePage;
+import pl.tomaszbuga.tests.models.article.ArticleDetails;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -40,6 +41,16 @@ public class ArticleDetailsPage extends BasePage {
 
     public String getArticleIdFromUrl() {
         return WebDriverRunner.url().split("=")[1];
+    }
+
+    public ArticleDetails getArticleDetailsFromPage() {
+        return ArticleDetails.builder()
+                .setTitle(getArticleTitle())
+                .setPublishDate(getArticlePublishDate())
+                .setAuthorFullName(getArticleAuthorFullName())
+                .setSummary(getArticleSummary())
+                .setContent(getArticleContent())
+                .build();
     }
 
     public String getArticleTitle() {

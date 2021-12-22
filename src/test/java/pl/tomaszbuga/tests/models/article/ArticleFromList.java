@@ -3,6 +3,7 @@ package pl.tomaszbuga.tests.models.article;
 import java.util.Objects;
 
 public class ArticleFromList {
+
     public static ArticleFromListBuilder builder() {
         return new ArticleFromListBuilder();
     }
