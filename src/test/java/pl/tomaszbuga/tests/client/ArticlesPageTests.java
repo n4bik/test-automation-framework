@@ -2,69 +2,61 @@ package pl.tomaszbuga.tests.client;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.ArticlesPage;
-import pl.tomaszbuga.pom.HomePage;
-import pl.tomaszbuga.tests.models.article.ArticleFromList;
+import pl.tomaszbuga.tests.models.article.Article;
 import pl.tomaszbuga.utils.DbDataProvider;
 
 import java.util.List;
 
 public class ArticlesPageTests {
+    ArticlesPage articlesPage;
+
+    @BeforeMethod
+    public void setup() {
+        articlesPage = new ArticlesPage();
+    }
+
     @Test
     public void verifyArticlesListWithDataBase() {
-        HomePage homePage = new HomePage();
-        ArticlesPage articlesPage = homePage
-                .openHomePage()
-                .clickYellowButton()
-                .checkIfCategoriesPageLoaded()
-                .clickFirstAvailableCategory()
-                .checkIfArticlesPageLoaded();
+        openArticlesPageWithApiAuth(articlesPage);
 
-        List<ArticleFromList> articlesListFromDb =
+        List<Article> articlesListFromDb =
                 DbDataProvider.getArticlesListByCategoryId(articlesPage.getCategoryIdFromUrl());
 
+        List<Article> articlesListFromPage =
+                articlesPage.getArticleListFromPage();
+
         Assert.assertTrue(CollectionUtils
-                .isEqualCollection(articlesListFromDb, articlesPage.getArticleListFromPage()));
+                .isEqualCollection(articlesListFromDb, articlesListFromPage));
     }
 
     @Test
     public void verifyTooltipDisplayOnBadgeHover() {
-        HomePage homePage = new HomePage();
-        homePage
-                .openHomePage()
-                .clickYellowButton()
-                .checkIfCategoriesPageLoaded()
-                .clickFirstAvailableCategory()
-                .checkIfArticlesPageLoaded()
+        openArticlesPageWithApiAuth(articlesPage)
                 .hoverOverCategoryBadge()
                 .checkIfCategoryBadgeTitleDisplayed();
     }
 
     @Test
     public void verifyOpenArticleSidebarExpandOnHover() {
-        HomePage homePage = new HomePage();
-        homePage
-                .openHomePage()
-                .clickYellowButton()
-                .checkIfCategoriesPageLoaded()
-                .clickFirstAvailableCategory()
-                .checkIfArticlesPageLoaded()
+        openArticlesPageWithApiAuth(articlesPage)
                 .hoverOverGoToArticleButton()
                 .checkIfGoToArticleSidebarDisplayed();
     }
 
     @Test
     public void verifyThatGoToArticleButtonRedirectsToArticleDetails() {
-        HomePage homePage = new HomePage();
-        homePage
-                .openHomePage()
-                .clickYellowButton()
-                .checkIfCategoriesPageLoaded()
-                .clickFirstAvailableCategory()
-                .checkIfArticlesPageLoaded()
+        openArticlesPageWithApiAuth(articlesPage)
                 .clickGoToArticleButton()
                 .checkIfArticleDetailsPageLoaded();
+    }
+
+    private ArticlesPage openArticlesPageWithApiAuth(ArticlesPage articlesPage) {
+        return articlesPage
+                .openArticlesPageWithApiAuth()
+                .checkIfArticlesPageLoaded();
     }
 
 }

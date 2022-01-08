@@ -1,7 +1,6 @@
 package pl.tomaszbuga.utils;
 
-import pl.tomaszbuga.tests.models.article.ArticleDetails;
-import pl.tomaszbuga.tests.models.article.ArticleFromList;
+import pl.tomaszbuga.tests.models.article.Article;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -33,8 +32,8 @@ public class DbDataProvider {
         return titleList;
     }
 
-    public static List<ArticleFromList> getArticlesListByCategoryId(String categoryId) {
-        List<ArticleFromList> articleList = new ArrayList<>();
+    public static List<Article> getArticlesListByCategoryId(String categoryId) {
+        List<Article> articleList = new ArrayList<>();
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
@@ -57,12 +56,12 @@ public class DbDataProvider {
                      "GROUP BY 1, 2, 3;")) {
 
             while (resultSet.next()) {
-                ArticleFromList articleFromList = ArticleFromList.builder()
-                        .setTitle(resultSet.getString(1))
-                        .setAuthorFullName(resultSet.getString(2))
-                        .setPublishDate(resultSet.getString(3))
-                        .setCategoryTagList(resultSet.getString(4))
-                        .setCategoryTitleList(resultSet.getString(5))
+                Article articleFromList = Article.builder()
+                        .title(resultSet.getString(1))
+                        .authorFullName(resultSet.getString(2))
+                        .publishDate(resultSet.getString(3))
+                        .categoryTagList(resultSet.getString(4))
+                        .categoryTitleList(resultSet.getString(5))
                         .build();
 
                 articleList.add(articleFromList);
@@ -75,8 +74,8 @@ public class DbDataProvider {
         return articleList;
     }
 
-    public static ArticleDetails getArticleDetails(String articleId) {
-        ArticleDetails articleDetails = null;
+    public static Article getArticleDetails(String articleId) {
+        Article articleDetails = null;
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
@@ -90,12 +89,12 @@ public class DbDataProvider {
                              "WHERE article.id = " + articleId + ";")) {
 
             while (resultSet.next()) {
-                articleDetails = ArticleDetails.builder()
-                        .setTitle(resultSet.getString(1))
-                        .setPublishDate(resultSet.getString(2))
-                        .setAuthorFullName(resultSet.getString(3))
-                        .setSummary(resultSet.getString(4))
-                        .setContent(resultSet.getString(5))
+                articleDetails = Article.builder()
+                        .title(resultSet.getString(1))
+                        .publishDate(resultSet.getString(2))
+                        .authorFullName(resultSet.getString(3))
+                        .summary(resultSet.getString(4))
+                        .content(resultSet.getString(5))
                         .build();
             }
 

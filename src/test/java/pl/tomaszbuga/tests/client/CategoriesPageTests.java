@@ -2,35 +2,41 @@ package pl.tomaszbuga.tests.client;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.tomaszbuga.pom.HomePage;
+import pl.tomaszbuga.pom.CategoriesPage;
 
 import java.util.List;
 
 import static pl.tomaszbuga.utils.DbDataProvider.getCategoryTitles;
 
 public class CategoriesPageTests {
+    private CategoriesPage categoriesPage;
+
+    @BeforeMethod
+    public void setup() {
+        categoriesPage = new CategoriesPage();
+    }
 
     @Test
     public void verifyCategoriesListWithDatabase() {
-        HomePage homePage = new HomePage();
-        List<String> categoryTitlesFromPage = homePage
-                .openHomePage()
-                .clickYellowButton()
-                .checkIfCategoriesPageLoaded()
-                .getCategoryTitlesFromPage();
+        List<String> categoryTitlesFromPage =
+                openCategoriesPageWithApiAuth(categoriesPage).getCategoryTitlesFromPage();
 
-        Assert.assertTrue(CollectionUtils.isEqualCollection(getCategoryTitles(), categoryTitlesFromPage));
+        Assert.assertTrue(
+                CollectionUtils.isEqualCollection(getCategoryTitles(), categoryTitlesFromPage));
     }
 
     @Test
     public void verifyThatClickOnCategoryRedirectsToArticlesPage() {
-        HomePage homePage = new HomePage();
-        homePage
-                .openHomePage()
-                .clickYellowButton()
-                .checkIfCategoriesPageLoaded()
+        openCategoriesPageWithApiAuth(categoriesPage)
                 .clickFirstAvailableCategory()
                 .checkIfArticlesPageLoaded();
+    }
+
+    private CategoriesPage openCategoriesPageWithApiAuth(CategoriesPage categoriesPage) {
+        return categoriesPage
+                .openCategoriesPageWithApiAuth()
+                .checkIfCategoriesPageLoaded();
     }
 }

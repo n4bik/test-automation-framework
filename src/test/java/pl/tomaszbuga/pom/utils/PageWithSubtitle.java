@@ -6,8 +6,4 @@ import static com.codeborne.selenide.Selenide.$;
 
 public abstract class PageWithSubtitle extends BasePage {
     protected final SelenideElement subtitle = $(".subtitle-content");
-
-    public PageWithSubtitle(Class<?> cls) {
-        super(cls);
-    }
 }
