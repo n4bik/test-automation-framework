@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.ArticleDetailsPage;
 import pl.tomaszbuga.tests.models.article.Article;
 
-import static pl.tomaszbuga.utils.DbDataProvider.getArticleDetails;
+import static pl.tomaszbuga.utils.database.DbDataProvider.getArticleDetails;
 
 public class ArticleDetailsPageTests {
     @Test

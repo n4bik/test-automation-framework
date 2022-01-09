@@ -6,7 +6,7 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E09 Fear Branch
+## S01E10 Fear Branch
 Related article available at:
 https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-magic-or-jira-selenide-complex-sql-java-225e1ba3d93e
 
@@ -16,7 +16,7 @@ Test Automation Framework - Reusable template for Java/Selenium frameworks. Lear
 
 ## Tech Stack
 
-`Java 11` `Maven` `TestNG` `Selenide` `Apache Commons Collections`
+`Java 17` `Maven` `TestNG` `Selenide` `Apache Commons Collections` `Lombok` `Rest Assured` `Gson`
 
 ## Key Files Description
 

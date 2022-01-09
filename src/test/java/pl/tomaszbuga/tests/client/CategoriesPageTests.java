@@ -8,7 +8,7 @@ import pl.tomaszbuga.pom.CategoriesPage;
 
 import java.util.List;
 
-import static pl.tomaszbuga.utils.DbDataProvider.getCategoryTitles;
+import static pl.tomaszbuga.utils.database.DbDataProvider.getCategoryTitles;
 
 public class CategoriesPageTests {
     private CategoriesPage categoriesPage;

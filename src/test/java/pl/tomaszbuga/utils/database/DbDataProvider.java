@@ -1,4 +1,4 @@
-package pl.tomaszbuga.utils;
+package pl.tomaszbuga.utils.database;
 
 import pl.tomaszbuga.tests.models.article.Article;
 
@@ -9,7 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static pl.tomaszbuga.utils.DbConnector.getConnection;
+import static pl.tomaszbuga.utils.database.DbConnector.getConnection;
+import static pl.tomaszbuga.utils.database.SqlQueriesProvider.*;
 
 public class DbDataProvider {
 
@@ -18,7 +19,7 @@ public class DbDataProvider {
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT title FROM category")) {
+             ResultSet resultSet = statement.executeQuery(getCategoryTitlesQuery())) {
 
             while (resultSet.next()) {
                 String categoryTitle = resultSet.getString(1);
@@ -37,23 +38,7 @@ public class DbDataProvider {
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT article.title,\n" +
-                     "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
-                     "       article.publish_date,\n" +
-                     "       string_agg(category.tag, ', ')                   as category_tag_list,\n" +
-                     "       string_agg(category.title, ', ')                 as category_title_list\n" +
-                     "FROM category,\n" +
-                     "     article_category,\n" +
-                     "     (\n" +
-                     "         SELECT article_id as aid\n" +
-                     "         FROM article_category\n" +
-                     "         WHERE category_id = " + categoryId + "\n" +
-                     "     ) as ac\n" +
-                     "         JOIN article\n" +
-                     "              ON article.id = ac.aid\n" +
-                     "WHERE article.id = article_category.article_id\n" +
-                     "  AND category.id = article_category.category_id\n" +
-                     "GROUP BY 1, 2, 3;")) {
+             ResultSet resultSet = statement.executeQuery(getArticlesListByCategoryIdQuery(categoryId))) {
 
             while (resultSet.next()) {
                 Article articleFromList = Article.builder()
@@ -79,14 +64,7 @@ public class DbDataProvider {
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(
-                     "SELECT article.title,\n" +
-                             "       article.publish_date,\n" +
-                             "       CONCAT(author_first_name, ' ', author_last_name) as author_full_name,\n" +
-                             "       article.summary,\n" +
-                             "       article.content\n" +
-                             "FROM article\n" +
-                             "WHERE article.id = " + articleId + ";")) {
+             ResultSet resultSet = statement.executeQuery(getArticleDetailsQuery(articleId))) {
 
             while (resultSet.next()) {
                 articleDetails = Article.builder()

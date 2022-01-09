@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.ArticlesPage;
 import pl.tomaszbuga.tests.models.article.Article;
-import pl.tomaszbuga.utils.DbDataProvider;
+import pl.tomaszbuga.utils.database.DbDataProvider;
 
 import java.util.List;
 

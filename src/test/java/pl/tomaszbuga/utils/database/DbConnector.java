@@ -1,4 +1,4 @@
-package pl.tomaszbuga.utils;
+package pl.tomaszbuga.utils.database;
 
 import java.sql.*;
 import java.util.Properties;
