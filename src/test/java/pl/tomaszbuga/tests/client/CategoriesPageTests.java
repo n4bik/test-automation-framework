@@ -6,8 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.CategoriesPage;
 
-import java.util.List;
-
 import static pl.tomaszbuga.utils.database.DbDataProvider.getCategoryTitles;
 
 public class CategoriesPageTests {
@@ -20,11 +18,11 @@ public class CategoriesPageTests {
 
     @Test
     public void verifyCategoriesListWithDatabase() {
-        List<String> categoryTitlesFromPage =
-                openCategoriesPageWithApiAuth(categoriesPage).getCategoryTitlesFromPage();
-
         Assert.assertTrue(
-                CollectionUtils.isEqualCollection(getCategoryTitles(), categoryTitlesFromPage));
+                CollectionUtils.isEqualCollection(
+                        getCategoryTitles(),
+                        openCategoriesPageWithApiAuth(categoriesPage).getCategoryTitlesFromPage()
+                ));
     }
 
     @Test
@@ -39,4 +37,5 @@ public class CategoriesPageTests {
                 .openCategoriesPageWithApiAuth()
                 .checkIfCategoriesPageLoaded();
     }
+
 }

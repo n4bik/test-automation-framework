@@ -1,9 +1,7 @@
 package pl.tomaszbuga.pom;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.WebDriverRunner;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.Cookie;
 import pl.tomaszbuga.pom.utils.PageWithSubtitle;
 
 import java.util.List;
@@ -50,4 +48,5 @@ public class CategoriesPage extends PageWithSubtitle {
         titlesFromPage.get(0).click();
         return new ArticlesPage();
     }
+
 }

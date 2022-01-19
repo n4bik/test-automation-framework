@@ -121,4 +121,5 @@ public class ArticlesPage extends PageWithSubtitle {
         goToArticleButton.click();
         return new ArticleDetailsPage();
     }
+
 }

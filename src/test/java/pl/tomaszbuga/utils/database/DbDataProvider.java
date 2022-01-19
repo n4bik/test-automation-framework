@@ -82,4 +82,5 @@ public class DbDataProvider {
 
         return articleDetails;
     }
+
 }

@@ -9,6 +9,7 @@ import pl.tomaszbuga.pom.CategoriesPage;
 import pl.tomaszbuga.pom.HomePage;
 
 public class HomePageTests {
+
     @Test
     public void verifyThatYellowButtonRedirectsToCategoriesPage() {
         HomePage homePage = new HomePage();
@@ -41,4 +42,5 @@ public class HomePageTests {
 
         Assert.assertEquals(WebDriverRunner.url(), "http://localhost:4200/");
     }
+
 }

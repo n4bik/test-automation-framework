@@ -8,6 +8,7 @@ import pl.tomaszbuga.tests.models.article.Article;
 import static pl.tomaszbuga.utils.database.DbDataProvider.getArticleDetails;
 
 public class ArticleDetailsPageTests {
+
     @Test
     public void verifyThatArticleDetailsAreDisplayedCorrectly() {
         ArticleDetailsPage articleDetailsPage = new ArticleDetailsPage();
@@ -23,4 +24,5 @@ public class ArticleDetailsPageTests {
                 .openArticleDetailsPageWithApiAuth()
                 .checkIfArticleDetailsPageLoaded();
     }
+
 }

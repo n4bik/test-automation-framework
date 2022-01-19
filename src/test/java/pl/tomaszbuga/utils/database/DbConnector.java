@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.Properties;
 
 public class DbConnector {
+
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:postgresql://localhost:5431/postgres";
         Properties props = new Properties();
@@ -12,4 +13,5 @@ public class DbConnector {
 
         return DriverManager.getConnection(url, props);
     }
+
 }

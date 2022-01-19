@@ -78,4 +78,5 @@ public class ArticleDetailsPage extends BasePage {
     public String getArticleContent() {
         return articleContent.innerHtml();
     }
+
 }

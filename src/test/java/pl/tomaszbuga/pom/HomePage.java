@@ -22,4 +22,5 @@ public class HomePage extends BasePage {
         yellowButton.click();
         return new CategoriesPage();
     }
+
 }

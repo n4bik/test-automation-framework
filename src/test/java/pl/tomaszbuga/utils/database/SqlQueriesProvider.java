@@ -1,6 +1,7 @@
 package pl.tomaszbuga.utils.database;
 
 public abstract class SqlQueriesProvider {
+
     protected static String getCategoryTitlesQuery() {
         return """
                 SELECT title FROM category;
@@ -39,4 +40,5 @@ public abstract class SqlQueriesProvider {
                 WHERE article.id = %s;
                 """, articleId);
     }
+
 }
