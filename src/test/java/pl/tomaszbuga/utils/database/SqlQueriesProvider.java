@@ -9,7 +9,7 @@ public abstract class SqlQueriesProvider {
     }
 
     protected static String getArticlesListByCategoryIdQuery(String categoryId) {
-        return String.format("""
+        return """
                 SELECT article.title,
                       concat(author_first_name, ' ', author_last_name) AS author_full_name,
                       article.publish_date,
@@ -26,11 +26,11 @@ public abstract class SqlQueriesProvider {
                 WHERE article.id = article_category.article_id
                 AND category.id = article_category.category_id
                 GROUP BY 1, 2, 3;
-                """, categoryId);
+                """.formatted(categoryId);
     }
 
     protected static String getArticleDetailsQuery(String articleId) {
-        return String.format("""
+        return """
                 SELECT article.title,
                        article.publish_date,
                        CONCAT(author_first_name, ' ', author_last_name) as author_full_name,
@@ -38,7 +38,7 @@ public abstract class SqlQueriesProvider {
                        article.content
                 FROM article
                 WHERE article.id = %s;
-                """, articleId);
+                """.formatted(articleId);
     }
 
 }
