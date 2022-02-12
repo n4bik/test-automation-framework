@@ -8,7 +8,7 @@ LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
 ## S01E11 Minority Report Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-minority-report-or-allure-in-action-346acd70a433
 
 ## Project Overview
 
