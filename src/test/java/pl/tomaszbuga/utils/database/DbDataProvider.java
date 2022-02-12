@@ -1,5 +1,6 @@
 package pl.tomaszbuga.utils.database;
 
+import io.qameta.allure.Step;
 import pl.tomaszbuga.tests.models.article.Article;
 
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import static pl.tomaszbuga.utils.database.SqlQueriesProvider.*;
 
 public class DbDataProvider {
 
+    @Step("Get Category titles from Database")
     public static List<String> getCategoryTitles() {
         List<String> titleList = new ArrayList<>();
 
@@ -33,6 +35,7 @@ public class DbDataProvider {
         return titleList;
     }
 
+    @Step("Get Articles list from Database for Category ID: {categoryId}")
     public static List<Article> getArticlesListByCategoryId(String categoryId) {
         List<Article> articleList = new ArrayList<>();
 
@@ -59,6 +62,7 @@ public class DbDataProvider {
         return articleList;
     }
 
+    @Step("Get Article details from Database for article ID: {articleId}")
     public static Article getArticleDetails(String articleId) {
         Article articleDetails = null;
 

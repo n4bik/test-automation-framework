@@ -1,16 +1,22 @@
 package pl.tomaszbuga.tests.client;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Issue;
+import io.qameta.allure.TmsLink;
 import org.apache.commons.collections4.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.ArticlesPage;
 import pl.tomaszbuga.tests.models.article.Article;
+import pl.tomaszbuga.tests.utils.BaseTest;
 import pl.tomaszbuga.utils.database.DbDataProvider;
 
 import java.util.List;
 
-public class ArticlesPageTests {
+@Epic("USD - Client Side")
+public class ArticlesPageTests extends BaseTest {
+
     ArticlesPage articlesPage;
 
     @BeforeMethod
@@ -18,7 +24,9 @@ public class ArticlesPageTests {
         articlesPage = new ArticlesPage();
     }
 
-    @Test
+    @Test(description = "Verify that Article List is displayed correctly (compared with Database)")
+    @TmsLink("USD-8")
+    @Issue("USD-13")
     public void verifyArticlesListWithDataBase() {
         openArticlesPageWithApiAuth(articlesPage);
 
@@ -32,21 +40,24 @@ public class ArticlesPageTests {
                 .isEqualCollection(articlesListFromDb, articlesListFromPage));
     }
 
-    @Test
+    @Test(description = "Verify that Tooltip displays when User hovers over Category Badge")
+    @TmsLink("USD-9")
     public void verifyTooltipDisplayOnBadgeHover() {
         openArticlesPageWithApiAuth(articlesPage)
                 .hoverOverCategoryBadge()
                 .checkIfCategoryBadgeTitleDisplayed();
     }
 
-    @Test
+    @Test(description = "Verify that Open Article sidebar expands on hovering over Go To Article icon")
+    @TmsLink("USD-10")
     public void verifyOpenArticleSidebarExpandOnHover() {
         openArticlesPageWithApiAuth(articlesPage)
                 .hoverOverGoToArticleButton()
                 .checkIfGoToArticleSidebarDisplayed();
     }
 
-    @Test
+    @Test(description = "Verify that Go To Article button redirects to Articles")
+    @TmsLink("USD-11")
     public void verifyThatGoToArticleButtonRedirectsToArticleDetails() {
         openArticlesPageWithApiAuth(articlesPage)
                 .clickGoToArticleButton()

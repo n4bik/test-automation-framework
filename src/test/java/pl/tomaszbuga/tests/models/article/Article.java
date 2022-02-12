@@ -13,6 +13,7 @@ import static pl.tomaszbuga.utils.StringUtils.parseListIntoString;
 @Builder
 @EqualsAndHashCode
 public class Article {
+
     private final String title;
     private final String authorFullName;
     private final String publishDate;

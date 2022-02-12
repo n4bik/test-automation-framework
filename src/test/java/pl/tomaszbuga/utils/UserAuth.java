@@ -1,14 +1,17 @@
 package pl.tomaszbuga.utils;
 
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.open;
 import static io.restassured.RestAssured.given;
 
 public class UserAuth {
+
     private static String token = "";
 
+    @Step("Add Auth Cookies to WebDriver")
     public static void addAuthCookiesToDriver() {
         generateTokenIfNeeded();
         open("http://localhost:4200");
@@ -34,7 +37,7 @@ public class UserAuth {
                 .addCookie(cookie);
     }
 
-    public static String getJwtToken() {
+    private static String getJwtToken() {
         String json = "{\"username\": \"tbuga\",\"password\": \"4dm1n?!\"}";
 
         return given()

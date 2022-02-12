@@ -6,9 +6,9 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
-## S01E10 Fear Branch
+## S01E11 Minority Report Branch
 Related article available at:
-https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-fear-or-code-review-and-refactoring-part-2-96fd6361a25e
+https://sdet-tomaszbuga.medium.com/
 
 ## Project Overview
 
@@ -16,7 +16,7 @@ Test Automation Framework - Reusable template for Java/Selenium frameworks. Lear
 
 ## Tech Stack
 
-`Java 17` `Maven` `TestNG` `Selenide` `Apache Commons Collections` `Lombok` `Rest Assured` `Gson`
+`Java 17` `Maven` `TestNG` `Selenide` `Apache Commons Collections` `Lombok` `Rest Assured` `Allure`
 
 ## Key Files Description
 

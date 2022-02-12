@@ -1,14 +1,19 @@
 package pl.tomaszbuga.tests.client;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.TmsLink;
 import org.apache.commons.collections4.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.tomaszbuga.pom.CategoriesPage;
+import pl.tomaszbuga.tests.utils.BaseTest;
 
 import static pl.tomaszbuga.utils.database.DbDataProvider.getCategoryTitles;
 
-public class CategoriesPageTests {
+@Epic("USD - Client Side")
+public class CategoriesPageTests extends BaseTest {
+
     private CategoriesPage categoriesPage;
 
     @BeforeMethod
@@ -16,7 +21,8 @@ public class CategoriesPageTests {
         categoriesPage = new CategoriesPage();
     }
 
-    @Test
+    @Test(description = "Verify that Categories list is displayed correctly (compared with Database)")
+    @TmsLink("USD-6")
     public void verifyCategoriesListWithDatabase() {
         Assert.assertTrue(
                 CollectionUtils.isEqualCollection(
@@ -25,7 +31,8 @@ public class CategoriesPageTests {
                 ));
     }
 
-    @Test
+    @Test(description = "Verify that Category button redirects to Articles Page")
+    @TmsLink("USD-7")
     public void verifyThatClickOnCategoryRedirectsToArticlesPage() {
         openCategoriesPageWithApiAuth(categoriesPage)
                 .clickFirstAvailableCategory()
