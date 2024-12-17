@@ -8,13 +8,17 @@ GitHub: https://github.com/n4bik
 
 LinkedIn: https://www.linkedin.com/in/tomasz-buga-79933886/
 
+## S01E08 Magic - ClientTest Branch
+Related article available at:
+https://sdet-tomaszbuga.medium.com/test-automation-framework-selenium-with-java-magic-or-jira-selenide-complex-sql-java-225e1ba3d93e
+
 ## Project Overview
 
 Test Automation Framework - Reusable template for Java/Selenium frameworks. Learn more about the project here: https://sdet-tomaszbuga.medium.com/
 
 ## Tech Stack
 
-`Java 11` `Maven` `TestNG` `Selenium`
+`Java 11` `Maven` `TestNG` `Selenide` `Apache Commons Collections`
 
 ## Key Files Description
 
@@ -30,6 +34,7 @@ Apache Maven (https://maven.apache.org/download.cgi)
 Launch `Terminal.app` and navigate (using `cd` command) to directory, where you'd like to store your copy of the source code
 
 Use the command below to clone the repository to your local directory
+
 ```
 git clone https://github.com/n4bik/test-automation-framework.git
 ``` 
